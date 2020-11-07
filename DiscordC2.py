@@ -12,7 +12,7 @@ async def on_message(message):
 
     if message.content.split()[0] in commands:
         result = await commands[message.content.split()[0]](message)
-        if result != '':
+        if result != '' and result is not None:
             await message.channel.send(result)
 
 
