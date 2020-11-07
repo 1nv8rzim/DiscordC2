@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-def time(message):
+async def time(message):
     if '-v' in message.content or '--verbose' in message.content:
         if '-m' in message.content or '--military' in message.content:
             return datetime.now().strftime('%A, %B %d, %Y, %H:%M:%S')
@@ -11,7 +11,7 @@ def time(message):
     return datetime.now().strftime("%I:%M:%S %p")
 
 
-def echo(message):
+async def echo(message):
     try:
         return message.content.split(' ', 1)[1]
     except:
@@ -20,7 +20,9 @@ def echo(message):
 
 async def clear(message):
     try:
-        limit = int(message.content.split('', 1)[1])
-        await message.channel.purge(limit)
+        limit = int(message.content.split(' ', 1)[1]) + 1
+        if limit < 0:
+            raise Exception()
+        await message.channel.purge(limit=limit)
     except:
-        await message.channel.purge(limit=100)
+        await message.channel.purge(limit=150)
