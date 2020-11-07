@@ -1,5 +1,4 @@
 from datetime import datetime
-import discord
 
 
 def time(message):
@@ -19,7 +18,7 @@ def echo(message):
         return ''
 
 
-def clear(message):
+async def clear(message):
     try:
         limit = int(message.content.split('', 1)[1])
         await message.channel.purge(limit)
