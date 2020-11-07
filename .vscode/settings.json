@@ -7,5 +7,5 @@
     "cSpell.ignoreWords": [
         "commands"
     ],
-    "python.pythonPath":"/Users/maxfusco/DiscordC2/"
+    "python.pythonPath":"/usr/local/bin/python3"
 }
