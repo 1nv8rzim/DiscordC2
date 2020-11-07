@@ -5,7 +5,8 @@
         "src"
     ],
     "cSpell.ignoreWords": [
-        "commands"
+        "commands",
+        "leubb"
     ],
     "python.pythonPath":"/usr/local/bin/python3"
 }
