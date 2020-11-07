@@ -14,7 +14,6 @@ async def on_message(message):
         result = commands[message.content.split()[0]](message)
         if result != '':
             await message.channel.send(result)
-    await message.channel.purge()
 
 
 @client.event
