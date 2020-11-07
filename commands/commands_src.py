@@ -8,27 +8,31 @@ async def temp(message):
 
 async def time(message):
     # parser
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog='time', description='gets time')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='increases verbosity of output')
     parser.add_argument('-m', '--military', action='store_true',
                         help='displays time in military time')
-    args = parser.parse_args(message.content.split()[1:]) if len(message.content.split()) > 1 else args = parser.parse_args([])
+    args = parser.parse_args(message.content.split()[1:]) if len(
+        message.content.split()) > 1 else parser.parse_args([])
 
-    # gets time
-    time = datetime.now()
+    try:
+        # gets time
+        time = datetime.now()
 
-    # military time or not
-    if args.military:
-        output = time.strftime('%H:%M:%S')
-    else:
-        output = time.strftime('%I:%M:%S %p')
+        # military time or not
+        if args.military:
+            output = time.strftime('%H:%M:%S')
+        else:
+            output = time.strftime('%I:%M:%S %p')
 
-    # verbose output or not
-    if args.verbose:
-        output = time.strftime('%A, %B %d, %Y, ') + output
+        # verbose output or not
+        if args.verbose:
+            output = time.strftime('%A, %B %d, %Y, ') + output
 
-    return time
+        return output
+    except:
+        pass
 
 
 async def echo(message):
