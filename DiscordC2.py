@@ -10,7 +10,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.split()[0] in commands:
+    if message.content.split()[0].lower() in commands:
         result = await commands[message.content.split()[0]](message)
         if result != '' and result is not None:
             await message.channel.send(result)

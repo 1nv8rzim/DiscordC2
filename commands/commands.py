@@ -2,9 +2,10 @@ from commands.commands_src import *
 commands = {"time": time,
             "echo": echo,
             "clear": clear,
-            "info": None,
-            "show": None,
-            "console": None,
-            "upload": None,
-            "help": None,
-            "hello": None}
+            "c2": lambda x: pass,
+            "info": lambda x: pass,
+            "show": lambda x: pass,
+            "console": lambda x: pass,
+            "upload": lambda x: pass,
+            "help": lambda x: pass,
+            "hello": hello}

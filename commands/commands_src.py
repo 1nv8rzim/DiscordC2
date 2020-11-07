@@ -26,3 +26,7 @@ async def clear(message):
         await message.channel.purge(limit=limit)
     except:
         await message.channel.purge(limit=150)
+
+
+async def hello(message):
+    return f'Hello {message.author.mention}!'
