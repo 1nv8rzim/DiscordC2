@@ -3,5 +3,9 @@
         "commands",
         "commands src",
         "src"
-    ]
+    ],
+    "cSpell.ignoreWords": [
+        "commands"
+    ],
+    "python.pythonPath":"/Users/maxfusco/DiscordC2/"
 }
