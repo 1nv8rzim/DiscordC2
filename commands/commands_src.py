@@ -1,4 +1,5 @@
 from datetime import datetime
+import argparse
 
 
 async def temp(message):
@@ -6,13 +7,28 @@ async def temp(message):
 
 
 async def time(message):
-    if '-v' in message.content or '--verbose' in message.content:
-        if '-m' in message.content or '--military' in message.content:
-            return datetime.now().strftime('%A, %B %d, %Y, %H:%M:%S')
-        return datetime.now().strftime('%A, %B %d, %Y, %I:%M:%S %p')
-    if '-m' in message.content or '--military' in message.content:
-        return datetime.now().strftime("%H:%M:%S")
-    return datetime.now().strftime("%I:%M:%S %p")
+    # parser
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='increases verbosity of output')
+    parser.add_argument('-m', '--military', action='store_true',
+                        help='displays time in military time')
+    args = parser.parse_args(message.content.split()[1:]) if len(message.content.split()) > 1 else args = parser.parse_args([])
+
+    # gets time
+    time = datetime.now()
+
+    # military time or not
+    if args.military:
+        output = time.strftime('%H:%M:%S')
+    else:
+        output = time.strftime('%I:%M:%S %p')
+
+    # verbose output or not
+    if args.verbose:
+        output = time.strftime('%A, %B %d, %Y, ') + output
+
+    return time
 
 
 async def echo(message):
