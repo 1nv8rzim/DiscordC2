@@ -1,6 +1,10 @@
 from datetime import datetime
 
 
+async def temp(message):
+    return None
+
+
 async def time(message):
     if '-v' in message.content or '--verbose' in message.content:
         if '-m' in message.content or '--military' in message.content:

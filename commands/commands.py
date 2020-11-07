@@ -1,11 +1,13 @@
 from commands.commands_src import *
+
+
 commands = {"time": time,
             "echo": echo,
             "clear": clear,
-            "c2": lambda x: pass,
-            "info": lambda x: pass,
-            "show": lambda x: pass,
-            "console": lambda x: pass,
-            "upload": lambda x: pass,
-            "help": lambda x: pass,
+            "c2": temp,
+            "info": temp,
+            "show": temp,
+            "console": temp,
+            "upload": temp,
+            "help": temp,
             "hello": hello}
