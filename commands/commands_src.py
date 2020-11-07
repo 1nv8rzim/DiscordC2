@@ -1,5 +1,19 @@
 from datetime import datetime
 import argparse
+from contextlib import contextmanager
+import sys
+import os
+
+
+@contextmanager
+def suppressStream(stream):
+    with open(os.devnull, "w") as devNull:
+        orig = stream
+        stream = devNull
+        try:
+            yield
+        finally:
+            stream = orig
 
 
 async def temp(message):
@@ -13,10 +27,12 @@ async def time(message):
                         help='increases verbosity of output')
     parser.add_argument('-m', '--military', action='store_true',
                         help='displays time in military time')
-    args = parser.parse_args(message.content.split()[1:]) if len(
-        message.content.split()) > 1 else parser.parse_args([])
 
     try:
+        with suppressStream(sys.stderr), suppressStream(sys.stdout):
+            args = parser.parse_args(message.content.split()[1:]) if len(
+                message.content.split()) > 1 else parser.parse_args([])
+
         # gets time
         time = datetime.now()
 
@@ -32,7 +48,7 @@ async def time(message):
 
         return output
     except:
-        pass
+        return parser.format_help()
 
 
 async def echo(message):
