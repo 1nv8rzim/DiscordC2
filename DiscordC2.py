@@ -1,5 +1,6 @@
 import discord
 from private.information import bot_token as TOKEN
+from commands.commands import commands
 
 client = discord.Client()
 
@@ -9,9 +10,8 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!hello'):
-        msg = f'Hello {message.author.mention}'
-        await message.channel.send(msg)
+    if message.content.split()[0] in commands:
+        await message.channel.send(commands[message.content.split()[0]](message))
 
 
 @client.event
