@@ -11,7 +11,10 @@ async def on_message(message):
         return
 
     if message.content.split()[0] in commands:
-        await message.channel.send(commands[message.content.split()[0]](message))
+        result = commands[message.content.split()[0]](message)
+        if result != '':
+            await message.channel.send(result)
+    await message.channel.purge()
 
 
 @client.event
