@@ -19,6 +19,12 @@ class hidePrint:
         sys.stderr = self.original_stderr
 
 
+def get_args(parser, message):
+    with hidePrint():
+        return parser.parse_args(message.content.split()[1:]) if len(
+            message.content.split()) > 1 else parser.parse_args([])
+
+
 async def temp(message):
     return None
 
@@ -33,9 +39,7 @@ async def time(message):
 
     try:
         # parses commandline inputs
-        with hidePrint():
-            args = parser.parse_args(message.content.split()[1:]) if len(
-                message.content.split()) > 1 else parser.parse_args([])
+        args = get_args(parser, message)
 
         # gets time
         time = datetime.now()
@@ -66,9 +70,7 @@ async def echo(message):
                         default=1, type=number_filter(lambda x: x > 0))
     try:
         # parse commandline inputs
-        with hidePrint():
-            args = parser.parse_args(message.content.split()[1:]) if len(
-                message.content.split()) > 1 else parser.parse_args([])
+        args = get_args(parser, message)
 
         # returns output
         msg = ' '.join(args.string)
@@ -87,8 +89,7 @@ async def clear(message):
     try:
         # parse commandline inputs
         with hidePrint():
-            args = parser.parse_args(message.content.split()[1:]) if len(
-                message.content.split()) > 1 else parser.parse_args([])
+            args = get_args(parser, message)
 
         # purges desired lines
         await message.channel.purge(limit=args.limit + 1)
@@ -105,8 +106,7 @@ async def hello(message):
     try:
         # parse commandline inputs
         with hidePrint():
-            args = parser.parse_args(message.content.split()[1:]) if len(
-                message.content.split()) > 1 else parser.parse_args([])
+            args = get_args(parser, message)
 
         # return output
         return f'Hello {message.author.mention}!'
