@@ -50,10 +50,10 @@ async def time(message):
         if args.verbose:
             output = time.strftime('%A, %B %d, %Y, ') + output
 
-        # return output
+        # returns output
         return output
     except:
-        # return usage
+        # returns usage
         return parser.format_help()
 
 
@@ -75,6 +75,7 @@ async def echo(message):
         for i in range(args.n):
             await message.channel.send(msg)
     except:
+        # returns usage
         return parser.format_help()
 
 
@@ -84,15 +85,19 @@ async def clear(message):
     parser.add_argument('limit', default=150, type=number_filter(lambda x: x >= 0), nargs='?',
                         help='number of previous lines to be clear [0,infinity)')
     try:
+        # parse commandline inputs
         with hidePrint():
             args = parser.parse_args(message.content.split()[1:]) if len(
                 message.content.split()) > 1 else parser.parse_args([])
+
+        # purges desired lines
         await message.channel.purge(limit=args.limit + 1)
     except:
         return parser.format_help()
 
 
 async def hello(message):
+    # creates parser
     return f'Hello {message.author.mention}!'
 
 
