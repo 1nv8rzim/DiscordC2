@@ -93,12 +93,26 @@ async def clear(message):
         # purges desired lines
         await message.channel.purge(limit=args.limit + 1)
     except:
+        # return usage
         return parser.format_help()
 
 
 async def hello(message):
     # creates parser
-    return f'Hello {message.author.mention}!'
+    parser = argparse.ArgumentParser(
+        prog='hello', description='says hello to user')
+
+    try:
+        # parse commandline inputs
+        with hidePrint():
+            args = parser.parse_args(message.content.split()[1:]) if len(
+                message.content.split()) > 1 else parser.parse_args([])
+
+        # return output
+        return f'Hello {message.author.mention}!'
+    except:
+        # returns usage
+        return parser.format_help()
 
 
 # helper functions
