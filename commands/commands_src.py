@@ -75,14 +75,29 @@ async def echo(message):
 
 
 async def clear(message):
+    # creates parser
+    parser = argparse.ArgumentParser(prog='clear', description='clears lines')
+    parser.add_argument('limit', default=150, type=positive_int, nargs='?',
+                        help='number of previous lines to be clear [0,infinity)')
     try:
-        limit = int(message.content.split(' ', 1)[1]) + 1
-        if limit < 0:
-            raise Exception()
-        await message.channel.purge(limit=limit)
+        with hidePrint():
+            args = parser.parse_args(message.content.split()[1:]) if len(
+                message.content.split()) > 1 else parser.parse_args([])
+        await message.channel.purge(limit=args.limit + 1)
     except:
-        await message.channel.purge(limit=150)
+        return parser.format_help()
 
 
 async def hello(message):
     return f'Hello {message.author.mention}!'
+
+
+# helper fucntion
+def positive_int(value):
+    try:
+        value = int(value)
+    except:
+        raise argparse.ArgumentTypeError()
+    if value <= 0:
+        raise argparse.ArgumentTypeError()
+    return value
