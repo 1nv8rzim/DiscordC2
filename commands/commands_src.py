@@ -73,7 +73,7 @@ async def echo(message):
         # returns output
         msg = ' '.join(args.string)
         for i in range(args.n):
-            message.channel.send(msg)
+            await message.channel.send(msg)
     except:
         return parser.format_help()
 
@@ -96,8 +96,9 @@ async def hello(message):
     return f'Hello {message.author.mention}!'
 
 
-# helper fucntion
-def number_filter(function, value):
+# helper functions
+
+def number_filter(function):
     def inner(value):
         try:
             value = int(value)
@@ -106,3 +107,4 @@ def number_filter(function, value):
         if not function(value):
             raise argparse.ArgumentTypeError()
         return value
+    return inner
