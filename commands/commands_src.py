@@ -50,17 +50,28 @@ async def time(message):
         if args.verbose:
             output = time.strftime('%A, %B %d, %Y, ') + output
 
+        # return output
         return output
     except:
+        # return usage
         return parser.format_help()
 
 
 async def echo(message):
     # creates parser
+    parser = argparse.ArgumentParser(prog='echo', description='repeats input')
+    parser.add_argument(
+        'string', help='line to be repeated', type=str, nargs='+')
     try:
-        return message.content.split(' ', 1)[1]
+        # parse commandline inputs
+        with hidePrint():
+            args = parser.parse_args(message.content.split()[1:]) if len(
+                message.content.split()) > 1 else parser.parse_args([])
+
+        # returns output
+        return ' '.join(args.string)
     except:
-        return ''
+        return parser.format_help()
 
 
 async def clear(message):
