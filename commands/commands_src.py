@@ -5,6 +5,8 @@ import sys
 import os
 
 
+# essential functions
+
 class hidePrint:
     def __enter__(self):
         self.original_stdout = sys.stdout
@@ -24,6 +26,8 @@ def get_args(parser, message):
         return parser.parse_args(message.content.split()[1:]) if len(
             message.content.split()) > 1 else parser.parse_args([])
 
+
+# commands
 
 async def temp(message):
     return None
