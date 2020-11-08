@@ -5,15 +5,18 @@ import sys
 import os
 
 
-@contextmanager
-def suppressStream(stream):
-    with open(os.devnull, "w") as devNull:
-        orig = stream
-        stream = devNull
-        try:
-            yield
-        finally:
-            stream = orig
+class hidePrint:
+    def __enter__(self):
+        self.original_stdout = sys.stdout
+        self.original_stderr = sys.stderr
+        sys.stdout = open(os.devnull, 'w')
+        sys.stderr = open(os.devnull, 'w')
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout.close()
+        sys.stderr.close()
+        sys.stdout = self.original_stdout
+        sys.stderr = self.original_stderr
 
 
 async def temp(message):
@@ -21,7 +24,7 @@ async def temp(message):
 
 
 async def time(message):
-    # parser
+    # creates parser
     parser = argparse.ArgumentParser(prog='time', description='gets time')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='increases verbosity of output')
@@ -29,7 +32,8 @@ async def time(message):
                         help='displays time in military time')
 
     try:
-        with suppressStream(sys.stderr), suppressStream(sys.stdout):
+        # parses commandline inputs
+        with hidePrint():
             args = parser.parse_args(message.content.split()[1:]) if len(
                 message.content.split()) > 1 else parser.parse_args([])
 
@@ -52,6 +56,7 @@ async def time(message):
 
 
 async def echo(message):
+    # creates parser
     try:
         return message.content.split(' ', 1)[1]
     except:
