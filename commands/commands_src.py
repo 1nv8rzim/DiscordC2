@@ -62,6 +62,8 @@ async def echo(message):
     parser = argparse.ArgumentParser(prog='echo', description='repeats input')
     parser.add_argument(
         'string', help='line to be repeated', type=str, nargs='+')
+    parser.add_argument('-n', help='number of times repeated',
+                        default=1, type=number_filter(lambda x: x > 0))
     try:
         # parse commandline inputs
         with hidePrint():
@@ -69,7 +71,9 @@ async def echo(message):
                 message.content.split()) > 1 else parser.parse_args([])
 
         # returns output
-        return ' '.join(args.string)
+        msg = ' '.join(args.string)
+        for i in range(args.n):
+            message.channel.send(msg)
     except:
         return parser.format_help()
 
@@ -77,7 +81,7 @@ async def echo(message):
 async def clear(message):
     # creates parser
     parser = argparse.ArgumentParser(prog='clear', description='clears lines')
-    parser.add_argument('limit', default=150, type=positive_int, nargs='?',
+    parser.add_argument('limit', default=150, type=number_filter(lambda x: x >= 0), nargs='?',
                         help='number of previous lines to be clear [0,infinity)')
     try:
         with hidePrint():
@@ -93,11 +97,12 @@ async def hello(message):
 
 
 # helper fucntion
-def positive_int(value):
-    try:
-        value = int(value)
-    except:
-        raise argparse.ArgumentTypeError()
-    if value <= 0:
-        raise argparse.ArgumentTypeError()
-    return value
+def number_filter(function, value):
+    def inner(value)
+       try:
+            value = int(value)
+        except:
+            raise argparse.ArgumentTypeError()
+        if not function(value):
+            raise argparse.ArgumentTypeError()
+        return value
