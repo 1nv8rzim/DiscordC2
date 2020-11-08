@@ -99,7 +99,7 @@ async def hello(message):
 # helper fucntion
 def number_filter(function, value):
     def inner(value):
-       try:
+        try:
             value = int(value)
         except:
             raise argparse.ArgumentTypeError()
