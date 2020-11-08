@@ -98,7 +98,7 @@ async def hello(message):
 
 # helper fucntion
 def number_filter(function, value):
-    def inner(value)
+    def inner(value):
        try:
             value = int(value)
         except:
