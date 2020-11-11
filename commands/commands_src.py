@@ -29,6 +29,30 @@ def get_args(parser, message):
 
 # commands
 
+async def info(message):
+    pass
+
+
+async def show(message):
+    pass
+
+
+async def c2(message):
+    pass
+
+
+async def upload(message):
+    pass
+
+
+async def help(message):
+    pass
+
+
+async def console(message):
+    pass
+
+
 async def temp(message):
     return None
 
