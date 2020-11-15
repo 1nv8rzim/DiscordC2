@@ -53,10 +53,6 @@ async def console(message):
     pass
 
 
-async def temp(message):
-    return None
-
-
 async def time(message):
     # creates parser
     parser = argparse.ArgumentParser(prog='time', description='gets time')
