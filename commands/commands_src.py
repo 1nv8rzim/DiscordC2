@@ -46,7 +46,14 @@ async def upload(message):
 
 
 async def help(message):
-    pass
+    # creates parser
+    parser = argparse.ArgumentParser(
+        prog='help', description='helps learn more about functions')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='increases verbosity of output')
+    parser.add_argument('command', default=None, nargs='?',
+                        help='commands to provide help on')
+    # TODO - finish function
 
 
 async def console(message):
