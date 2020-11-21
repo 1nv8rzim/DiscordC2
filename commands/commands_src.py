@@ -3,6 +3,7 @@ import argparse
 from contextlib import contextmanager
 import sys
 import os
+from commands import commands
 
 
 # essential functions
@@ -53,7 +54,23 @@ async def help(message):
                         help='increases verbosity of output')
     parser.add_argument('command', default=None, nargs='?',
                         help='commands to provide help on')
-    # TODO - finish function
+
+    try:
+        # parses commandline inputs
+        args = get_args(parser, message)
+
+        # get requested help
+        for cmd in args.command:
+            if cmd in commands:
+                commands[cmd]('help')
+
+        # if not help is requested, help for all functions is given
+        if args.commands is None:
+            for cmd in commands:
+                commands[cmd]('help')
+    except:
+        # return usage
+        return parser.format_help()
 
 
 async def console(message):
