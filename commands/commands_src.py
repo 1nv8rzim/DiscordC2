@@ -23,7 +23,7 @@ class hidePrint:
 
 
 def get_args(parser, message):
-    if message is 'help':
+    if message == 'help':
         return parser.format_help()
     with hidePrint():
         return parser.parse_args(message.content.split()[1:]) if len(
