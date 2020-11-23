@@ -51,7 +51,7 @@ async def help(message):
     # creates parser
     parser = argparse.ArgumentParser(
         prog='help', description='helps learn more about functions')
-    parser.add_argument('command', default=None, nargs='+', type=str,
+    parser.add_argument('command', nargs='*', type=str,
                         help='commands to provide help on')
 
     try:
@@ -64,9 +64,9 @@ async def help(message):
                 await message.channel.send(await commands[cmd]('help'))
 
         # if not help is requested, help for all functions is given
-        if args.command is None:
+        if args.command == []:
             for cmd in commands:
-                message.channel.send(await commands[cmd]('help'))
+                await message.channel.send(await commands[cmd]('help'))
     except:
         # return usage
         return parser.format_help()
