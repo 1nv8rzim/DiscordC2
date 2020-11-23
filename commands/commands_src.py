@@ -3,7 +3,17 @@ import argparse
 from contextlib import contextmanager
 import sys
 import os
-from commands import commands
+
+commands = {"time",
+            "echo",
+            "clear",
+            "c2",
+            "info",
+            "show",
+            "console",
+            "upload",
+            "help",
+            "hello"}
 
 
 # essential functions
@@ -24,7 +34,7 @@ class hidePrint:
 
 def get_args(parser, message):
     if message == 'help':
-        return parser.format_help()
+        raise Exception()
     with hidePrint():
         return parser.parse_args(message.content.split()[1:]) if len(
             message.content.split()) > 1 else parser.parse_args([])
@@ -52,9 +62,7 @@ async def help(message):
     # creates parser
     parser = argparse.ArgumentParser(
         prog='help', description='helps learn more about functions')
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='increases verbosity of output')
-    parser.add_argument('command', default=None, nargs='?',
+    parser.add_argument('command', default=None, nargs='+', type=str,
                         help='commands to provide help on')
 
     try:
@@ -62,12 +70,16 @@ async def help(message):
         args = get_args(parser, message)
 
         # get requested help
+        print(0, args.command)
         for cmd in args.command:
+            print(1, cmd)
+            print(2, cmd in commands)
             if cmd in commands:
+                print(3, commands[cmd])
                 commands[cmd]('help')
 
         # if not help is requested, help for all functions is given
-        if args.commands is None:
+        if args.command is None:
             for cmd in commands:
                 commands[cmd]('help')
     except:
@@ -115,7 +127,7 @@ async def echo(message):
     # creates parser
     parser = argparse.ArgumentParser(prog='echo', description='repeats input')
     parser.add_argument(
-        'string', help='line to be repeated', type=str, nargs='+')
+        'string', help='line to be repeated', type=str, nargs='?')
     parser.add_argument('-n', help='number of times repeated',
                         default=1, type=number_filter(lambda x: x > 0))
     try:
