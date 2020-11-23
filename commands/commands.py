@@ -53,6 +53,8 @@ async def help(message):
         prog='help', description='helps learn more about functions')
     parser.add_argument('command', nargs='*', type=str,
                         help='commands to provide help on')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='increases verbosity of output')
 
     try:
         # parses commandline inputs
@@ -65,8 +67,16 @@ async def help(message):
 
         # if not help is requested, help for all functions is given
         if args.command == []:
+            output = 'commands:'
             for cmd in commands:
-                await message.channel.send(await commands[cmd]('help'))
+                try:
+                    part = await commands[cmd]('help')
+                    if not args.verbose:
+                        part = part.split('\n')[0][6:]
+                    output += '\n' + part
+                except:
+                    pass
+            await message.channel.send(output)
     except:
         # return usage
         return parser.format_help()
