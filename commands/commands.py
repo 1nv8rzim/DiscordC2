@@ -180,6 +180,8 @@ def number_filter(function):
     return inner
 
 
+# commands
+
 commands = {"time": time,
             "echo": echo,
             "clear": clear,
