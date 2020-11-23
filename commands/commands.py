@@ -59,18 +59,14 @@ async def help(message):
         args = get_args(parser, message)
 
         # get requested help
-        print(0, args.command)
         for cmd in args.command:
-            print(1, cmd)
-            print(2, cmd in commands)
             if cmd in commands:
-                print(3, commands[cmd])
-                commands[cmd]('help')
+                await message.channel.send(await commands[cmd]('help'))
 
         # if not help is requested, help for all functions is given
         if args.command is None:
             for cmd in commands:
-                commands[cmd]('help')
+                message.channel.send(await commands[cmd]('help'))
     except:
         # return usage
         return parser.format_help()
