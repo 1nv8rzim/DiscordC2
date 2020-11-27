@@ -1,5 +1,6 @@
 """
-
+DiscordC2.py
+Author: 1nv8rZim
 """
 import discord
 from private.information import bot_token as TOKEN
