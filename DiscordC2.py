@@ -1,3 +1,6 @@
+"""
+
+"""
 import discord
 from private.information import bot_token as TOKEN
 from commands.commands import commands
