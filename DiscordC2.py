@@ -1,6 +1,7 @@
 """
 DiscordC2.py
 Author: 1nv8rZim
+Runs discord bot
 """
 import discord
 from private.information import bot_token as TOKEN
