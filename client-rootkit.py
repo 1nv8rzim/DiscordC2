@@ -5,3 +5,4 @@ from os import getpid
 from random import choice
 
 token = ''.join(choice(ascii_letters + digits) for _ in range(72))
+pid = getpid()
