@@ -11,4 +11,5 @@ pid = getpid()
 print(pid)
 
 while True:
-    sleep(1000)
+    if input == "exit":
+        break
