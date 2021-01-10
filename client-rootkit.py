@@ -5,6 +5,8 @@ from os import getpid
 from random import choice
 from time import sleep
 
+PROC_HIDE_CMD = ''
+
 token = ''.join(choice(ascii_letters + digits) for _ in range(72))
 pid = getpid()
 
