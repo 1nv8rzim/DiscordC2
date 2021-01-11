@@ -6,6 +6,7 @@ from random import choice
 from time import sleep
 
 PROC_HIDE_CMD = ''
+BEACON_INTERVAL = 0
 
 token = ''.join(choice(ascii_letters + digits) for _ in range(72))
 pid = getpid()
