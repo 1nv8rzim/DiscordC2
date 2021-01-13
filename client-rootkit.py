@@ -5,7 +5,7 @@ from os import getpid
 from random import choice
 from time import sleep
 
-PROC_HIDE_CMD = ''
+PROC_HIDE_CMD = f''
 BEACON_INTERVAL = 0
 tmp_dir = ''
 
