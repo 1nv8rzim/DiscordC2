@@ -1,4 +1,4 @@
-#DiscordC2
+# DiscordC2
 
 Discord bot that can act as a command & control server
 
