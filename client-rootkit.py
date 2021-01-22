@@ -22,7 +22,7 @@ def PROC_HIDE_CMD(): return f'mount -o {TMP_DIR} /proc/{pid}'
 
 
 while True:
-    if input == "exit":
+    if input() == "exit":
         break
 
 
