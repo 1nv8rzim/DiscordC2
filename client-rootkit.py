@@ -20,6 +20,9 @@ BEACON_INTERVAL = 0
 LHOST = ""
 LPORT = 0
 
+class HIDE_CMD:
+    pass
+
 
 def PROC_HIDE_CMD(): return f'mount -o {TMP_DIR} /proc/{pid}'
 
